@@ -1,294 +1,452 @@
+/* =========================================================
+   estilo.css — Estilo "Hidrosafe"
+   Mismas clases que tu archivo original; al final hay
+   clases NUEVAS opcionales (menú, título grande, leyenda,
+   alerta roja, barras de nivel) para agregar en el JSP.
+   ========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,400;1,500&family=Nunito+Sans:wght@400;600;700&display=swap');
+
 :root {
-    --navy: #2F4156;
-    --teal: #567C8D;
-    --sky-blue: #C8D9E6;
-    --beige: #F5EFEB;
-    --white: #FFFFFF;
-    
-    --danger-bg: #F8D7DA;
-    --danger-text: #842029;
-    --warning-bg: #FFF3CD;
-    --warning-text: #664D03;
-    
-    --font-lora: 'Lora', Georgia, serif;
+    /* Paleta original (se mantienen los nombres) */
+    --azul-marino: #2F4156;
+    --celeste: #C8D9E6;
+    --blanco: #FFFFFF;
+    --marron-oscuro: #3E3630;
+    --marron-suave: #A79A8A;
+    --fondo-crema: #F5F2ED;
+
+    /* Nuevos tonos del diseño */
+    --azul-texto: #44566B;
+    --azul-suave: #E3E9EF;
+    --linea: #E2DED7;
+    --rojo-alerta: #B93A3A;
+    --rosa-alerta: #F6E9E6;
+
+    /* Niveles de riesgo (leyenda y zonas del mapa) */
+    --riesgo-alto: #C0403D;
+    --riesgo-medio: #E0A566;
+    --riesgo-bajo: #EFE3CF;
+    --sin-riesgo: #8FAAA3;
+
+    /* Estados y Alertas */
+    --badge-info: #2F4156;
+    --badge-warning: #FEF3C7;
+    --badge-danger: #FEE2E2;
+
+    --radio: 20px;
+    --sombra: 0 6px 24px rgba(47, 65, 86, 0.08);
+    --serif: 'Lora', Georgia, serif;
+    --sans: 'Nunito Sans', 'Segoe UI', system-ui, sans-serif;
 }
 
 * {
     box-sizing: border-box;
-    margin: 0;
-    padding: 0;
 }
 
 body {
-    font-family: var(--font-lora);
-    background-color: var(--beige);
-    color: var(--navy);
+    /* Olas del pie de página + fondo crema */
+    background-color: var(--fondo-crema);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 220' preserveAspectRatio='none'%3E%3Cpath fill='%23DDE3E8' d='M0 60 C240 10 420 110 720 80 C1020 50 1200 0 1440 50 L1440 220 L0 220Z'/%3E%3Cpath fill='%23A9B8C6' d='M0 130 C260 90 480 170 760 140 C1040 110 1240 90 1440 130 L1440 220 L0 220Z'/%3E%3Cpath fill='%235F7389' d='M0 185 C300 150 560 210 860 185 C1120 165 1300 170 1440 190 L1440 220 L0 220Z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: bottom center;
+    background-size: 100% 200px;
+    background-attachment: fixed;
+    min-height: 100vh;
+    color: var(--azul-texto);
+    font-family: var(--sans);
     line-height: 1.5;
+    margin: 0;
+    padding: 0 0 120px 0;
 }
 
-/* Navbar */
+h1, h2, h3 {
+    font-family: var(--serif);
+    color: var(--azul-marino);
+}
+
+/* ---------- Header Principal ---------- */
 .navbar {
-    background-color: var(--navy);
-    color: var(--white);
-    padding: 1rem 2rem;
+    background-color: transparent;
+    color: var(--azul-marino);
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 22px 32px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    border-bottom: 1px solid var(--linea);
 }
 
 .brand {
     display: flex;
     align-items: center;
-    gap: 0.6rem;
-}
-
-.brand-dot {
-    width: 10px;
-    height: 10px;
-    background-color: var(--sky-blue);
-    border-radius: 50%;
+    gap: 14px;
 }
 
 .brand h1 {
-    font-size: 1.4rem;
-    font-weight: 700;
+    margin: 0;
+    font-size: 1.9rem;
+    font-weight: 600;
+    color: var(--azul-marino);
+    padding-left: 14px;
+    border-left: 1px solid var(--azul-marino);
+}
+
+/* El punto pasa a ser el logo de olitas */
+.brand-dot {
+    height: 34px;
+    width: 46px;
+    border-radius: 0;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 46 34' fill='none' stroke='%232F4156' stroke-width='4' stroke-linecap='round'%3E%3Cpath d='M3 8 C12 0 20 14 30 8 C36 4 40 5 43 8'/%3E%3Cpath d='M3 18 C12 10 20 24 30 18 C36 14 40 15 43 18'/%3E%3Cpath d='M3 28 C12 20 20 34 30 28 C36 24 40 25 43 28'/%3E%3C/svg%3E") center / contain no-repeat;
 }
 
 .location-tag {
-    color: var(--sky-blue);
+    color: var(--azul-texto);
     font-size: 0.9rem;
 }
 
+/* ---------- Buscador ---------- */
 .search-box {
     display: flex;
-    gap: 0.5rem;
+    gap: 8px;
+    align-items: center;
 }
 
 .search-input {
-    font-family: var(--font-lora);
-    padding: 0.4rem 0.8rem;
-    border: 1px solid var(--teal);
-    border-radius: 4px;
-    background-color: var(--white);
-    color: var(--navy);
+    background-color: var(--blanco);
+    border: 1px solid transparent;
+    border-radius: 999px;
+    padding: 10px 18px;
+    font-family: var(--sans);
+    font-size: 0.95rem;
+    color: var(--azul-marino);
     outline: none;
+    box-shadow: var(--sombra);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.search-input::placeholder {
+    color: #8A96A3;
+}
+
+.search-input:focus {
+    border-color: var(--celeste);
+    box-shadow: 0 0 0 4px rgba(200, 217, 230, 0.6);
 }
 
 .search-button {
-    font-family: var(--font-lora);
-    padding: 0.4rem 1rem;
-    background-color: var(--teal);
-    color: var(--white);
+    background-color: var(--azul-suave);
+    color: var(--azul-marino);
     border: none;
-    border-radius: 4px;
+    border-radius: 999px;
+    padding: 10px 20px;
+    font-family: var(--sans);
+    font-weight: 700;
     cursor: pointer;
+    transition: background-color 0.2s ease;
 }
 
 .search-button:hover {
-    background-color: #436270;
+    background-color: var(--celeste);
 }
 
-/* Layout General */
+/* ---------- Contenedor Principal ---------- */
 .container {
-    max-width: 1300px;
-    margin: 1.5rem auto;
-    padding: 0 1rem;
+    max-width: 1400px;
+    margin: 32px auto;
+    padding: 0 32px;
 }
 
 .top-bar {
-    background-color: var(--white);
-    border: 1px solid var(--sky-blue);
-    border-radius: 6px;
-    padding: 0.8rem 1.2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1rem;
+    margin-bottom: 20px;
 }
 
 .select-field {
-    font-family: var(--font-lora);
-    padding: 0.3rem 0.6rem;
-    border: 1px solid var(--teal);
-    border-radius: 4px;
-    color: var(--navy);
+    padding: 9px 16px;
+    border-radius: 999px;
+    border: 1px solid var(--linea);
+    background-color: var(--blanco);
+    color: var(--azul-marino);
+    font-family: inherit;
 }
 
-.live-status {
+/* ---------- Banner de Alerta ---------- */
+.banner-alert {
+    background-color: var(--rosa-alerta);
+    border-left: 5px solid var(--rojo-alerta);
+    border-radius: var(--radio);
+    padding: 16px 22px;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    font-size: 0.85rem;
-    color: var(--teal);
+    gap: 14px;
+    margin-bottom: 20px;
+    color: var(--azul-texto);
+    box-shadow: var(--sombra);
 }
 
-.pulse-dot {
-    width: 8px;
-    height: 8px;
-    background-color: #27AE60;
-    border-radius: 50%;
-}
-
-.banner-alert {
-    background-color: var(--warning-bg);
-    border-left: 4px solid #E67E22;
-    color: var(--warning-text);
-    padding: 0.8rem 1.2rem;
-    border-radius: 4px;
-    display: flex;
-    gap: 0.8rem;
-    margin-bottom: 0.8rem;
+.banner-alert strong,
+.banner-alert h2,
+.banner-alert h3 {
+    color: var(--rojo-alerta);
+    font-family: var(--serif);
+    margin: 0;
 }
 
 .subtitle {
-    font-style: italic;
-    font-size: 0.88rem;
-    color: var(--teal);
-    margin-bottom: 1.2rem;
+    color: var(--azul-texto);
+    font-size: 1.1rem;
+    font-style: normal;
+    max-width: 30ch;
+    margin: 0 0 24px 0;
 }
 
-/* Dashboard & Mapa Ampliado */
+/* ---------- Dashboard: Izquierda - Mapa - Derecha ---------- */
 .dashboard-layout {
     display: grid;
-    grid-template-columns: 240px 1fr 240px;
-    gap: 1.2rem;
-    margin-bottom: 1.2rem;
+    grid-template-columns: 300px 1fr 360px;
+    gap: 28px;
+    align-items: start;
 }
 
 .side-panel {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 20px;
 }
 
+/* ---------- Tarjetas ---------- */
 .card {
-    background-color: var(--white);
-    border: 1px solid var(--sky-blue);
-    border-radius: 6px;
-    padding: 1rem;
+    background-color: var(--blanco);
+    border-radius: var(--radio);
+    padding: 22px 24px;
+    border: none;
+    box-shadow: var(--sombra);
+}
+
+/* Las tarjetas del panel izquierdo van en azul grisáceo */
+.dashboard-layout > .side-panel:first-child .card {
+    background-color: var(--azul-suave);
+    box-shadow: none;
 }
 
 .card h2, .card h3 {
-    font-size: 0.9rem;
-    color: var(--teal);
-    margin-bottom: 0.4rem;
+    font-family: var(--sans);
+    color: var(--azul-marino);
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 0 0 8px 0;
+}
+
+.card p {
+    margin: 0;
 }
 
 .data-value {
-    font-size: 1.7rem;
-    font-weight: 700;
-    color: var(--navy);
-    margin-bottom: 0.4rem;
+    font-family: var(--serif);
+    font-size: 2.4rem;
+    font-weight: 500;
+    line-height: 1.1;
+    color: var(--azul-marino);
 }
 
-.data-value small {
-    font-size: 0.9rem;
-    font-weight: 400;
-}
-
-.text-medium {
-    font-size: 1.3rem;
-}
-
-.text-danger {
-    color: var(--danger-text);
-}
-
-.badge {
-    display: inline-block;
-    padding: 0.2rem 0.5rem;
-    font-size: 0.75rem;
-    border-radius: 3px;
-    background-color: var(--sky-blue);
-    color: var(--navy);
-}
-
-.badge.warning { background-color: var(--warning-bg); color: var(--warning-text); }
-.badge.danger { background-color: var(--danger-bg); color: var(--danger-text); }
-
-/* Configuración del Mapa */
-.map-container {
-    display: flex;
-    height: 100%;
-}
-
+/* ---------- Mapa ---------- */
 .map-card {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
+    padding: 0;
+    overflow: hidden;
+    border-radius: 28px;
+    box-shadow: 0 10px 34px rgba(47, 65, 86, 0.16);
 }
 
 #map {
+    height: 620px;
     width: 100%;
-    height: 100%;
-    min-height: 480px;
-    border-radius: 4px;
-    border: 1px solid var(--sky-blue);
-    z-index: 1;
+    border-radius: 28px;
+    border: none;
 }
 
-/* Parte Inferior */
+/* Botones +/- de Leaflet como en el diseño */
+.leaflet-bar {
+    border: none !important;
+    border-radius: 14px !important;
+    overflow: hidden;
+    box-shadow: 0 4px 14px rgba(47, 65, 86, 0.2) !important;
+}
+
+.leaflet-bar a {
+    width: 44px !important;
+    height: 44px !important;
+    line-height: 44px !important;
+    color: var(--azul-marino) !important;
+    font-size: 1.4rem !important;
+    border-bottom: 1px solid var(--linea) !important;
+}
+
+.leaflet-bar a:last-child {
+    border-bottom: none !important;
+}
+
+.leaflet-popup-content-wrapper {
+    border-radius: 14px;
+    font-family: var(--sans);
+    color: var(--azul-texto);
+}
+
+/* ---------- Etiquetas (Badges) ---------- */
+.badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    margin-top: 8px;
+}
+
+.badge.info {
+    background-color: var(--azul-suave);
+    color: var(--azul-marino);
+}
+
+.badge.warning {
+    background-color: var(--badge-warning);
+    color: #92400E;
+}
+
+.badge.danger {
+    background-color: var(--rosa-alerta);
+    color: var(--rojo-alerta);
+}
+
+/* ---------- Sección Inferior ---------- */
 .bottom-layout {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 1.2rem;
+    gap: 28px;
+    margin-top: 28px;
 }
 
-.legend {
+/* =========================================================
+   CLASES NUEVAS (opcionales) — para completar el diseño
+   ========================================================= */
+
+/* Menú del header: <nav class="nav-links"><a class="nav-link active">Inicio</a>...</nav> */
+.nav-links {
     display: flex;
-    gap: 1rem;
-    font-size: 0.85rem;
-    margin-bottom: 0.8rem;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
-.dot {
-    display: inline-block;
-    width: 8px;
-    height: 8px;
+.nav-link {
+    color: var(--azul-marino);
+    text-decoration: none;
+    font-weight: 600;
+    padding: 10px 20px;
+    border-radius: 999px;
+    transition: background-color 0.2s ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    background-color: var(--azul-suave);
+}
+
+/* Título grande de la izquierda: <h2 class="hero-title">Mapa en tiempo real</h2> */
+.hero-title {
+    font-family: var(--serif);
+    font-size: 3.2rem;
+    font-weight: 500;
+    line-height: 1.1;
+    color: var(--azul-texto);
+    margin: 8px 0 20px 0;
+}
+
+/* Leyenda: <ul class="legend"><li><span class="legend-dot alto"></span>Riesgo alto</li>...</ul> */
+.legend {
+    list-style: none;
+    margin: 8px 0 0 0;
+    padding: 0 0 0 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.legend li {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.legend-dot {
+    width: 16px;
+    height: 16px;
     border-radius: 50%;
+    flex-shrink: 0;
 }
 
-.dot.normal { background-color: #27AE60; }
-.dot.atencion { background-color: #F1C40F; }
-.dot.alerta { background-color: #E67E22; }
-.dot.evacuacion { background-color: #E74C3C; }
+.legend-dot.alto  { background-color: var(--riesgo-alto); }
+.legend-dot.medio { background-color: var(--riesgo-medio); }
+.legend-dot.bajo  { background-color: var(--riesgo-bajo); }
+.legend-dot.nulo  { background-color: var(--sin-riesgo); }
 
-.threshold-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0.5rem;
+/* Tarjeta de alerta roja: <div class="card alert"> */
+.card.alert {
+    background-color: var(--rosa-alerta);
+    border-left: 5px solid var(--rojo-alerta);
 }
 
-.threshold-grid div {
-    background-color: var(--beige);
-    padding: 0.5rem;
-    border-radius: 4px;
-    font-weight: 700;
-    font-size: 0.85rem;
-    text-align: center;
+.card.alert h2, .card.alert h3 {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    color: var(--rojo-alerta);
 }
 
-.threshold-grid small {
+/* Barra de nivel de agua:
+   <div class="level-bar"><span style="width:60%"></span></div> */
+.level-bar {
+    height: 6px;
+    background-color: var(--azul-suave);
+    border-radius: 999px;
+    overflow: hidden;
+    margin: 6px 0 14px 0;
+}
+
+.level-bar span {
     display: block;
-    font-weight: 400;
-    color: var(--teal);
-    font-size: 0.75rem;
+    height: 100%;
+    background-color: #5F7389;
+    border-radius: 999px;
 }
 
-.notice {
-    background-color: var(--beige);
-    border-left: 3px solid var(--teal);
-    padding: 0.6rem 0.8rem;
-    border-radius: 0 4px 4px 0;
+/* Frase del pie: <p class="tagline">Prevenir también es cuidar el agua.</p> */
+.tagline {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.2rem;
+    color: var(--azul-texto);
+    max-width: 16ch;
 }
 
-.notice p {
-    font-size: 0.85rem;
-    margin: 0.2rem 0;
-}
+/* ---------- Responsive ---------- */
+@media (max-width: 1100px) {
+    .dashboard-layout {
+        grid-template-columns: 1fr;
+    }
 
-.notice small {
-    color: var(--teal);
-    font-size: 0.75rem;
+    .bottom-layout {
+        grid-template-columns: 1fr;
+    }
+
+    #map {
+        height: 440px;
+    }
+
+    .hero-title {
+        font-size: 2.4rem;
+    }
 }

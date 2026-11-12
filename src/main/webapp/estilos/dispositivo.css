@@ -1,0 +1,157 @@
+/* =========================================================
+   ABM de dispositivos (pegar al final de estilo.css)
+   ========================================================= */
+
+/* Mensajes después de editar / eliminar */
+.mensaje {
+    border-radius: 8px;
+    padding: 10px 16px;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+.mensaje-ok    { background-color: #E3EEE8; color: #2F5D4A; border-left: 5px solid #5E8C7A; }
+.mensaje-error { background-color: #FEE2E2; color: #991B1B; border-left: 5px solid #991B1B; }
+
+/* Tabla de dispositivos */
+.tabla-card { margin-top: 20px; }
+
+.tabla-scroll { overflow-x: auto; }
+
+.tabla-zonas {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--blanco);
+    border-radius: 8px;
+    overflow: hidden;
+    font-size: 0.9rem;
+}
+
+.tabla-zonas th {
+    background-color: var(--azul-marino);
+    color: var(--blanco);
+    text-align: left;
+    padding: 10px 12px;
+    font-weight: 600;
+}
+
+.tabla-zonas td {
+    padding: 9px 12px;
+    border-bottom: 1px solid #E7E1DC;
+    color: var(--marron-oscuro);
+}
+
+.tabla-zonas tr:last-child td { border-bottom: none; }
+.tabla-zonas tbody tr:hover    { background-color: #F5EFEB; }
+
+.tabla-zonas .col-acciones { white-space: nowrap; text-align: right; }
+
+.tabla-vacia { color: var(--marron-suave); font-style: italic; margin: 0; }
+
+/* Botones de la tabla */
+.btn-editar,
+.btn-eliminar {
+    display: inline-block;
+    padding: 5px 12px;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+    border: 1px solid transparent;
+}
+
+.btn-editar {
+    background-color: var(--celeste);
+    color: var(--azul-marino);
+}
+.btn-editar:hover { background-color: #b5ccdc; }
+
+.form-eliminar { display: inline; margin-left: 6px; }
+
+.btn-eliminar {
+    background-color: transparent;
+    color: #991B1B;
+    border-color: #E8BDBD;
+}
+.btn-eliminar:hover { background-color: #FEE2E2; }
+
+/* Página de edición */
+.link-volver {
+    display: inline-block;
+    margin-bottom: 15px;
+    color: var(--azul-marino);
+    text-decoration: none;
+    font-weight: 600;
+}
+.link-volver:hover { text-decoration: underline; }
+
+.editar-layout {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    gap: 20px;
+    align-items: start;
+}
+
+.form-editar {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--azul-marino);
+}
+
+.campo .search-input,
+.campo .select-field {
+    width: 100%;
+    padding: 8px 10px;
+    font-family: inherit;
+    font-size: 0.9rem;
+}
+
+.campo-doble {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.botones-editar {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 6px;
+}
+
+.botones-editar .search-button {
+    background-color: var(--azul-marino);
+    color: var(--blanco);
+    padding: 9px 18px;
+}
+.botones-editar .search-button:hover { background-color: #567C8D; }
+
+.btn-cancelar {
+    color: var(--marron-suave);
+    text-decoration: none;
+    font-weight: 600;
+}
+.btn-cancelar:hover { color: var(--marron-oscuro); }
+
+.ayuda-mapa { margin: 0 0 10px; font-size: 0.85rem; color: var(--marron-suave); }
+
+#mapa-editar {
+    width: 100%;
+    height: 420px;
+    border-radius: 8px;
+    border: 1px solid var(--azul-marino);
+}
+
+@media (max-width: 900px) {
+    .editar-layout { grid-template-columns: 1fr; }
+}
